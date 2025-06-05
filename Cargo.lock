@@ -3,6 +3,15 @@
 version = 4
 
 [[package]]
+name = "Real-Need-For-Racing"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "rand",
+ "winres",
+]
+
+[[package]]
 name = "ab_glyph"
 version = "0.2.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2260,15 +2269,6 @@ dependencies = [
  "log",
  "wasi 0.11.0+wasi-snapshot-preview1",
  "windows-sys 0.48.0",
-]
-
-[[package]]
-name = "my_2d_game"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "rand",
- "winres",
 ]
 
 [[package]]

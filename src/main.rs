@@ -31,7 +31,7 @@ fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(WindowPlugin {
             primary_window: Some(Window {
-                title: "Highway Runner".into(),
+                title: "Real Need For Racing".into(),
                 resolution: (800., 600.).into(),
                 present_mode: PresentMode::AutoVsync,
                 ..default()
