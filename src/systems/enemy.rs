@@ -11,9 +11,9 @@ pub fn spawn_enemy_over_time(
     asset_server: Res<AssetServer>,
 ) {
     if timer.0.tick(time.delta()).just_finished() {
-        let mut rng = rand::thread_rng();
-        let enemy_index = rng.gen_range(1..=5);
-        let x = rng.gen_range(-300.0..300.0);
+        let mut rng = rand::rng(); // changed from thread_rng()
+        let enemy_index = rng.random_range(1..=5); // changed from gen_range
+        let x = rng.random_range(-300.0..300.0);   // changed from gen_range
 
         commands.spawn((
             SpriteBundle {
@@ -30,6 +30,7 @@ pub fn spawn_enemy_over_time(
         ));
     }
 }
+
 
 pub fn enemy_movement(
     mut enemies: Query<(&mut Transform, &Velocity), With<Enemy>>,

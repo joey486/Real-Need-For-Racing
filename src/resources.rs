@@ -12,7 +12,6 @@ impl Default for EnemySpawnTimer {
 #[derive(Resource)]
 pub struct GameSpeed {
     pub time_elapsed: f32,
-    pub base_speed: f32,
     pub multiplier: f32,
 }
 
@@ -20,7 +19,6 @@ impl Default for GameSpeed {
     fn default() -> Self {
         Self {
             time_elapsed: 0.0,
-            base_speed: 150.0,
             multiplier: 1.0,
         }
     }

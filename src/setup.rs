@@ -39,5 +39,5 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     ));
 
     // UI
-    spawn_game_over_ui(commands, asset_server);
+    spawn_game_over_ui(commands);
 }

@@ -2,7 +2,7 @@ use bevy::prelude::*;
 use crate::components::{GameOverStats, GameOverUI};
 use crate::resources::{GameOver, GameSpeed};
 
-pub fn spawn_game_over_ui(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_game_over_ui(mut commands: Commands,) {
     commands
         .spawn((
             NodeBundle {
