@@ -1,6 +1,8 @@
 use bevy::prelude::*;
+use bevy::asset::AssetServer;
 use crate::components::*;
 use crate::ui::spawn_game_over_ui;
+use bevy_kira_audio::{Audio, AudioControl};
 
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
@@ -40,4 +42,10 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     // UI
     spawn_game_over_ui(commands);
+}
+
+
+pub fn play_music(asset_server: Res<AssetServer>, audio: Res<Audio>) {
+    let music = asset_server.load("audio/background_audio.ogg");
+    audio.play(music).looped();
 }

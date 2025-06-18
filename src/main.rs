@@ -7,13 +7,15 @@ mod ui;
 use bevy::{asset::AssetPlugin, prelude::*, window::PresentMode};
 use resources::*;
 use setup::setup;
+use setup::play_music;
 use systems::*;
 use ui::{display_game_over_screen, restart_game};
-use bevy_embedded_assets::EmbeddedAssetPlugin; // Remove this for now unless compatible
+use bevy_embedded_assets::EmbeddedAssetPlugin; 
+use bevy_kira_audio::prelude::*;
 
 fn main() {
     App::new()
-        .add_plugins(
+        .add_plugins((
             DefaultPlugins
                 .build()
                 .add_before::<bevy::asset::AssetPlugin, _>(EmbeddedAssetPlugin)
@@ -30,9 +32,9 @@ fn main() {
                     asset_folder: "assets".into(),
                     watch_for_changes: None, // updated field
                     ..default()
-                }),
+                }),AudioPlugin)
+
         )
-        // .add_plugins(EmbeddedAssetPlugin::default()) // ⚠️ Commented out due to incompatibility with Bevy 0.12
         .insert_resource(EnemySpawnTimer::default())
         .insert_resource(GameSpeed::default())
         .insert_resource(GameOver::default())
@@ -52,5 +54,6 @@ fn main() {
             )
                 .run_if(game_not_over),
         )
+        .add_systems(Startup, play_music) 
         .run();
 }
