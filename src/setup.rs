@@ -25,10 +25,13 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         super::systems::road::spawn_road_lines(&mut commands, line_texture.clone(), x, 10);
     }
 
-    // Player
+    // Player with collision bounds
+    let player_car_type = CarType::Player;
+    let player_collision_bounds = player_car_type.collision_bounds();
+
     commands.spawn((
         SpriteBundle {
-            texture: asset_server.load("player.png"),
+            texture: asset_server.load(player_car_type.asset_path()),
             transform: Transform {
                 translation: Vec3::new(0.0, -200.0, 10.0),
                 scale: Vec3::splat(0.1),
@@ -38,12 +41,15 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
         },
         Player,
         Velocity { speed: 150.0 },
+        player_car_type,
+        CollisionBounds {
+            size: player_collision_bounds,
+        },
     ));
 
     // UI
     spawn_game_over_ui(commands);
 }
-
 
 pub fn play_music(asset_server: Res<AssetServer>, audio: Res<Audio>) {
     let music = asset_server.load("audio/background_audio.ogg");

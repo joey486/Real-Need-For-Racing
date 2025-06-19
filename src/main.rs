@@ -13,6 +13,7 @@ use systems::*;
 use ui::{display_game_over_screen, restart_game};
 use bevy_embedded_assets::EmbeddedAssetPlugin; 
 use bevy_kira_audio::prelude::*;
+use collision::explosion_cleanup_system;
 
 fn main() {
     App::new()
@@ -31,10 +32,9 @@ fn main() {
                 })
                 .set(AssetPlugin {
                     asset_folder: "assets".into(),
-                    watch_for_changes: None, // updated field
+                    watch_for_changes: None,
                     ..default()
                 }),AudioPlugin)
-
         )
         .insert_resource(EnemySpawnTimer::default())
         .insert_resource(GameSpeed::default())
@@ -51,10 +51,18 @@ fn main() {
                 enemy_movement,
                 spawn_enemy_over_time,
                 cleanup_enemies,
-                check_collision,
+                check_collision, 
+                explosion_cleanup_system,
             )
                 .run_if(game_not_over),
         )
         .add_systems(Startup, play_music) 
         .run();
 }
+
+/*
+ For debugging to view bounding boxes:
+ Add this to add_systems()
+    #[cfg(debug_assertions)]
+    debug_draw_collision_bounds, 
+ */
