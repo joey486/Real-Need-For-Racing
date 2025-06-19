@@ -4,6 +4,24 @@ use crate::components::*;
 use crate::ui::spawn_game_over_ui;
 use bevy_kira_audio::{Audio, AudioControl};
 
+use bevy::window::PrimaryWindow;
+use windows::Win32::UI::WindowsAndMessaging::*;
+use windows::Win32::Foundation::{HWND, LPARAM, WPARAM};
+use windows::core::PCWSTR;
+
+use raw_window_handle::{HasRawWindowHandle, RawWindowHandle};
+
+use std::ffi::OsStr;
+use std::os::windows::ffi::OsStrExt;
+use std::iter::once;
+
+#[cfg(target_os = "windows")]
+use bevy::winit::WinitWindows;
+#[cfg(target_os = "windows")]
+
+
+
+
 pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     commands.spawn(Camera2dBundle::default());
 
@@ -54,4 +72,59 @@ pub fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 pub fn play_music(asset_server: Res<AssetServer>, audio: Res<Audio>) {
     let music = asset_server.load("audio/background_audio.ogg");
     audio.play(music).looped();
+}
+
+
+
+/// Converts a Rust string (`&str`) to a Windows wide string (`Vec<u16>`)
+fn to_wide(string: &str) -> Vec<u16> {
+    OsStr::new(string).encode_wide().chain(once(0)).collect()
+}
+
+#[cfg(target_os = "windows")]
+pub fn set_windows_titlebar_icon(
+    window_query: Query<Entity, With<PrimaryWindow>>,
+    winit_windows: NonSend<WinitWindows>,
+) {
+    if let Ok(window_entity) = window_query.get_single() {
+        if let Some(winit_window) = winit_windows.get_window(window_entity) {
+            let hwnd = match winit_window.raw_window_handle() {
+        RawWindowHandle::Win32(handle) => HWND(handle.hwnd as isize),
+        _ => {
+            eprintln!("Not a Win32 window");
+            return;
+        }
+    };
+            let icon_path = to_wide("assets/icon.ico");
+
+            unsafe {
+                match LoadImageW(
+                    None,
+                    PCWSTR(icon_path.as_ptr()),
+                    IMAGE_ICON,
+                    32,
+                    32,
+                    LR_LOADFROMFILE,
+                ) {
+                    Ok(icon_handle) => {
+                        SendMessageW(
+                            hwnd,
+                            WM_SETICON,
+                            WPARAM(ICON_BIG as usize),
+                            LPARAM(icon_handle.0 as isize),
+                        );
+                        SendMessageW(
+                            hwnd,
+                            WM_SETICON,
+                            WPARAM(ICON_SMALL as usize),
+                            LPARAM(icon_handle.0 as isize),
+                        );
+                    }
+                    Err(e) => {
+                        eprintln!("Failed to load icon: {:?}", e);
+                    }
+                }
+            }
+        }
+    }
 }

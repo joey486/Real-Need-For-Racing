@@ -14,6 +14,7 @@ use ui::{display_game_over_screen, restart_game};
 use bevy_embedded_assets::EmbeddedAssetPlugin; 
 use bevy_kira_audio::prelude::*;
 use collision::explosion_cleanup_system;
+use setup::set_windows_titlebar_icon;
 
 fn main() {
     App::new()
@@ -57,6 +58,7 @@ fn main() {
                 .run_if(game_not_over),
         )
         .add_systems(Startup, play_music) 
+        .add_systems(Startup, set_windows_titlebar_icon)
         .run();
 }
 
