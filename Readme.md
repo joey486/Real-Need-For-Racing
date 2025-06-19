@@ -47,7 +47,7 @@ This project is a racing game developed using [Bevy 0.11](https://bevyengine.org
 1. Clone the repository:
 
    ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/joey486/Real-Need-For-Racing.git
     cd Real-Need-For-Racing
    ```
 2. (Optional) Add embedded assets to the assets/ folder (if used).
