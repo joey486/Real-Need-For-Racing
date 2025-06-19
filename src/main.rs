@@ -60,9 +60,11 @@ fn main() {
         .run();
 }
 
-/*
+/* --------------------
+
  For debugging to view bounding boxes:
  Add this to add_systems()
     #[cfg(debug_assertions)]
     debug_draw_collision_bounds, 
+    
  */
