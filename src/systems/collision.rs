@@ -21,21 +21,11 @@ pub fn check_collision(
     };
 
     let player_pos = player_transform.translation;
-    // Account for the sprite scale in collision bounds - use abs() for negative scales
-    let player_scale = player_transform.scale;
-    let player_size = Vec2::new(
-        player_bounds.size.x * player_scale.x.abs(),
-        player_bounds.size.y * player_scale.y.abs(),
-    );
+    let player_size = player_bounds.size;
 
     for (enemy_transform, enemy_bounds) in enemy_query.iter() {
         let enemy_pos = enemy_transform.translation;
-        // Account for the sprite scale in collision bounds - use abs() for negative scales
-        let enemy_scale = enemy_transform.scale;
-        let enemy_size = Vec2::new(
-            enemy_bounds.size.x * enemy_scale.x.abs(),
-            enemy_bounds.size.y * enemy_scale.y.abs(),
-        );
+        let enemy_size = enemy_bounds.size;
 
         // AABB (Axis-Aligned Bounding Box) collision detection
         let collision = aabb_collision(player_pos.truncate(), player_size, enemy_pos.truncate(), enemy_size);
@@ -52,7 +42,7 @@ pub fn check_collision(
     }
 }
 
-// More accurate AABB collision detection
+// AABB collision detection
 fn aabb_collision(pos1: Vec2, size1: Vec2, pos2: Vec2, size2: Vec2) -> bool {
     let half_size1 = size1 / 2.0;
     let half_size2 = size2 / 2.0;
@@ -117,10 +107,7 @@ pub fn debug_draw_collision_bounds(
 ) {
     for (transform, bounds) in query.iter() {
         let pos = transform.translation.truncate();
-        let size = Vec2::new(
-            bounds.size.x * transform.scale.x,
-            bounds.size.y * transform.scale.y,
-        );
+        let size = bounds.size;
         
         // Draw a rectangle outline around the collision bounds
         gizmos.rect_2d(pos, 0.0, size, Color::RED);

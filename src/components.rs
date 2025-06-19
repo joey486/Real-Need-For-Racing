@@ -39,13 +39,13 @@ pub struct CollisionBounds {
 // Car type enum to identify different car models
 #[derive(Component, Clone, Copy, PartialEq)]
 pub enum CarType {
-    GreyPickupTruck,    // Image 1 - wider, longer truck
-    TealSedan,          // Image 2 - standard sedan
-    YellowTaxi,         // Image 3 - standard taxi
-    RedConvertible,     // Image 4 - longer sports car
-    GreenHatchback,     // Image 5 - compact car
-    RedSportscar,       // Image 6 - sports car with spoiler
-    Player,             // player.png
+    GreyPickupTruck,    
+    TealSedan,          
+    YellowTaxi,         
+    RedConvertible,     
+    GreenHatchback,     
+    RedSportscar,       
+    Player,             
 
 }
 
@@ -54,15 +54,16 @@ impl CarType {
     // Define custom collision bounds for each car type based on the images
     pub fn collision_bounds(&self) -> Vec2 {
         match self {
-            // Enemy cars use scale 0.2, so we need larger base collision bounds
-            CarType::GreyPickupTruck => Vec2::new(280.0, 550.0),  // 56*5, 110*5 - wider truck
-            CarType::TealSedan => Vec2::new(240.0, 475.0),        // 48*5, 95*5 - standard sedan
-            CarType::YellowTaxi => Vec2::new(240.0, 475.0),       // 48*5, 95*5 - similar to sedan
-            CarType::RedConvertible => Vec2::new(220.0, 525.0),   // 44*5, 105*5 - longer sports car
-            CarType::GreenHatchback => Vec2::new(230.0, 425.0),   // 46*5, 85*5 - smaller compact car
-            CarType::RedSportscar => Vec2::new(240.0, 500.0),
-            // Player uses scale 0.1, so we need even larger base collision bounds
-            CarType::Player => Vec2::new(500.0, 1200.0),           // 50*10, 90*10 - player car bounds
+            // Enemy cars 
+            CarType::GreyPickupTruck => Vec2::new(56.0, 110.0),  
+            CarType::TealSedan => Vec2::new(48.0, 95.0),         
+            CarType::YellowTaxi => Vec2::new(48.0, 95.0),        
+            CarType::RedConvertible => Vec2::new(44.0, 105.0),   
+            CarType::GreenHatchback => Vec2::new(46.0, 85.0),    
+            CarType::RedSportscar => Vec2::new(47.0,100.0),
+            // Player car
+            CarType::Player => Vec2::new(50.0, 120.0),            
+
         }
     }
 
