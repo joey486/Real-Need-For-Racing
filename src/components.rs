@@ -51,7 +51,7 @@ pub enum CarType {
 
 
 impl CarType {
-    // Define custom collision bounds for each car type based on the images
+    // Custom collision bounds for each car type based on the assets
     pub fn collision_bounds(&self) -> Vec2 {
         match self {
             // Enemy cars 
@@ -67,7 +67,6 @@ impl CarType {
         }
     }
 
-      // Get the asset path for each car type
     pub fn asset_path(&self) -> &'static str {
         match self {
             CarType::GreyPickupTruck => "enemies/enemy1.png",

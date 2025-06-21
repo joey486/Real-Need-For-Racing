@@ -3,8 +3,6 @@ use crate::resources::GameOver;
 use bevy::prelude::*;
 
 
-
-// Also update your collision system to handle negative scale properly
 pub fn check_collision(
     mut commands: Commands,
     mut game_over: ResMut<GameOver>,
@@ -61,7 +59,6 @@ fn aabb_collision(pos1: Vec2, size1: Vec2, pos2: Vec2, size2: Vec2) -> bool {
     !(left1 >= right2 || right1 <= left2 || top1 <= bottom2 || bottom1 >= top2)
 }
 
-// Helper function to spawn explosion
 fn spawn_explosion(
     commands: &mut Commands,
     asset_server: &Res<AssetServer>,

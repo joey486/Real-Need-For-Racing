@@ -16,6 +16,8 @@ use bevy_kira_audio::prelude::*;
 use collision::explosion_cleanup_system;
 use setup::set_windows_titlebar_icon;
 
+// Entry point for the game
+
 fn main() {
     App::new()
         .add_plugins((
@@ -66,6 +68,7 @@ fn main() {
 
  For debugging to view bounding boxes:
  Add this to add_systems()
+
     #[cfg(debug_assertions)]
     debug_draw_collision_bounds, 
     

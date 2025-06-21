@@ -4,7 +4,6 @@ pub mod game_state;
 pub mod movement;
 pub mod road;
 
-// re-export if needed:
 pub use collision::*;
 pub use enemy::*;
 pub use game_state::*;
