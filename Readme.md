@@ -1,6 +1,6 @@
 # Real Need For Racing
 
-A 2D/3D racing game built with Rust and the Bevy game engine.
+A 2D racing game built with Rust and the Bevy game engine.
 
 ---
 
@@ -32,6 +32,11 @@ This project is a racing game developed using [Bevy 0.11](https://bevyengine.org
 
 ---
 
+# Screenshot 
+![1750535245491](image/Readme/1750535245491.png)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
@@ -50,7 +55,7 @@ This project is a racing game developed using [Bevy 0.11](https://bevyengine.org
     git clone https://github.com/joey486/Real-Need-For-Racing.git
     cd Real-Need-For-Racing
    ```
-2. (Optional) Add embedded assets to the assets/ folder (if used).
+2. Add embedded assets to the assets/ folder.
 
 3. Build and run the game:
 ```bash
