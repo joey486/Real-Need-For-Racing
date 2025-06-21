@@ -33,7 +33,7 @@ This project is a racing game developed using [Bevy 0.11](https://bevyengine.org
 ---
 
 # Screenshot 
-![1750535245491](image/Readme/1750535245491.png)
+![1750535245491](assets/1750535245491.png)
 
 ---
 
